@@ -4,7 +4,19 @@
     <nav class="site-nav">
       <ul>
         {{ range .Site.Menus.main }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ if eq .Name "Home" }}
+            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ else if in (slice "About" "Contact" "Privacy Policy") .Name }}
+            {{ $page := $.Site.GetPage .URL }}
+            {{ if $page }}
+              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+          {{ else }}
+            {{ $sectionName := .Name | lower }}
+            {{ if gt (len (where $.Site.RegularPages "Section" $sectionName)) 0 }}
+              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+          {{ end }}
         {{ end }}
       </ul>
     </nav>
