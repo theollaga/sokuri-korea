@@ -31,7 +31,7 @@ Seoul Metro operates lines numbered 1 through 9, plus the Shinbundang Line, AREX
 
 ### Fare Structure
 
-As of 2026, the basic subway fare for adults using T-money is 1,400 won for distances up to 10 km. Additional distance charges apply per 5 km. Transfer discounts allow up to four transfers within 30 minutes for an additional 100 won per transfer. There are also discounted fares for children, teenagers, and seniors with proper identification.
+As of 2026, the basic subway fare for adults using T-money is approximately 1,400 won for distances up to 10 km. Additional distance charges apply per 5 km. Transfer discounts allow up to four transfers within 30 minutes for an additional 100 won per transfer. There are also discounted fares for children, teenagers, and seniors with proper identification.
 
 ### How to Ride
 
