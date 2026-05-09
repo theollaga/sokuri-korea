@@ -1,0 +1,18 @@
+Created Hugo layout and CSS files for Sokuri Korea project as per Sprint 2 specifications.
+
+Files created:
+1. layouts/_default/baseof.html
+2. layouts/_default/single.html
+3. layouts/_default/list.html
+4. layouts/_default/terms.html
+5. layouts/index.html
+6. layouts/partials/head.html
+7. layouts/partials/header.html
+8. layouts/partials/footer.html
+9. layouts/partials/seo.html
+10. assets/css/main.css
+
+All files are minimal but correct Hugo templates.
+Built successfully with Hugo (v0.124.1) using /tmp destination - no public/ left in project root.
+No analytics/ad scripts included. SEO partial outputs og:image/twitter:image only when .Params.featured_image exists.
+CSS uses Hugo Pipes for minification and fingerprinting.

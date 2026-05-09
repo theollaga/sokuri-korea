@@ -1,0 +1,1 @@
+TASK COMPLETED: Hugo layout and CSS files created for Sokuri Korea project per Sprint 2 specifications.

@@ -1,0 +1,24 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ if .Description }}
+  <p class="description">{{ .Description }}</p>
+{{ end }}
+<ul class="post-list">
+  {{ range .Pages }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+    </li>
+  {{ end }}
+</ul>
+{{ if .Paginator }}
+  <nav class="pagination">
+    {{ if .Paginator.HasPrev }}
+      <a href="{{ .Paginator.Prev.URL }}">&laquo; Prev</a>
+    {{ end }}
+    {{ if .Paginator.HasNext }}
+      <a href="{{ .Paginator.Next.URL }}">Next &raquo;</a>
+    {{ end }}
+  </nav>
+{{ end }}
+{{ end }}

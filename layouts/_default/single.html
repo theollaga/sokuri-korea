@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article class="post">
+  <h1>{{ .Title }}</h1>
+  {{ if .Params.featured_image }}
+    <figure>
+      <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" />
+    </figure>
+  {{ end }}
+  <div class="content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

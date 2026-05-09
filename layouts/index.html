@@ -1,0 +1,62 @@
+{{ define "main" }}
+<section class="hero">
+  <h1>{{ .Site.Title }}</h1>
+  <p>{{ .Site.Params.description }}</p>
+</section>
+<section class="about">
+  <h2>About Sokuri</h2>
+  <p>{{ .Site.Params.about | default "Discover Korean culture, travel, food, language, and modern life through practical guides for international readers." }}</p>
+</section>
+<section class="featured">
+  <h2>Featured Guide</h2>
+  <div class="grid">
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    {{ $first := $posts | first 1 }}
+    {{ range $first }}
+      <article class="card">
+        {{ if .Params.featured_image }}
+          <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" />
+        {{ end }}
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Description }}</p>
+      </article>
+    {{ end }}
+  </div>
+</section>
+<section class="explore">
+  <h2>Explore by Category</h2>
+  <div class="grid">
+    {{ $taxonomy := .Site.Taxonomies.categories }}
+    {{ range $name, $taxonomy := $taxonomy }}
+      {{ if gt ($taxonomy.Count) 0 }}
+        <a href="{{ "categories/" | relURL }}{{ $name | urlize }}" class="category-card">
+          <h3>{{ $name }}</h3>
+          <p>{{ $taxonomy.Count }} article{{ if gt ($taxonomy.Count) 1 }}s{{ end }}</p>
+        </a>
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+<section class="latest">
+  <h2>Latest Articles</h2>
+  <ul class="post-list">
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    {{ $first := $posts | first 5 }}
+    {{ range $first }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      </li>
+    {{ end }}
+  </ul>
+</section>
+<section class="why">
+  <h2>Why Learn About Korea?</h2>
+  <ul>
+    <li>Rich cultural heritage spanning thousands of years</li>
+    <li>Dynamic blend of tradition and modernity</li>
+    <li>Unique cuisine, language, and customs</li>
+    <li>Influential in technology, entertainment, and design</li>
+  </ul>
+</section>
+{{ end }}
