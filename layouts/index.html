@@ -25,7 +25,7 @@
       {{ if gt ($taxonomy.Count) 0 }}
         {{ $catURL := printf "/categories/%s/" ($name | urlize) | relURL }}
         <a href="{{ $catURL }}" class="category-card">
-          <h3>{{ $name }}</h3>
+          <h3>{{ $name | title }}</h3>
           <p>{{ $taxonomy.Count }} article{{ if gt ($taxonomy.Count) 1 }}s{{ end }}</p>
         </a>
       {{ end }}
