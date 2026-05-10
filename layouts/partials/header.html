@@ -4,11 +4,12 @@
       <h1 class="site-title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
       <nav class="site-nav">
         <ul>
-          {{ range .Site.Menus.main }}
-            {{ if or (eq .Name "Home") (eq .Name "Culture") (eq .Name "Food") (eq .Name "Language") (eq .Name "Transportation") (eq .Name "About") }}
-            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
-            {{ end }}
-          {{ end }}
+          <li><a href="/">Home</a></li>
+          <li><a href="/categories/culture/">Culture</a></li>
+          <li><a href="/categories/food/">Food</a></li>
+          <li><a href="/categories/language/">Language</a></li>
+          <li><a href="/categories/transportation/">Transportation</a></li>
+          <li><a href="/about/">About</a></li>
         </ul>
       </nav>
     </div>
