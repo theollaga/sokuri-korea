@@ -1,11 +1,8 @@
 {{ define "main" }}
+<div class="site-container">
 <section class="hero">
   <h1>{{ .Site.Title }}</h1>
   <p>{{ .Site.Params.description }}</p>
-</section>
-<section class="about">
-  <h2>About Sokuri</h2>
-  <p>{{ .Site.Params.about | default "Discover Korean culture, travel, food, language, and modern life through practical guides for international readers." }}</p>
 </section>
 <section class="featured">
   <h2>Featured Guide</h2>
@@ -14,9 +11,6 @@
     {{ $first := $posts | first 1 }}
     {{ range $first }}
       <article class="card">
-        {{ if .Params.featured_image }}
-          <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" />
-        {{ end }}
         <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
         <p>{{ .Description }}</p>
       </article>
@@ -26,10 +20,11 @@
 <section class="explore">
   <h2>Explore by Category</h2>
   <div class="grid">
-    {{ $taxonomy := .Site.Taxonomies.categories }}
+{{ $taxonomy := .Site.Taxonomies.categories }}
     {{ range $name, $taxonomy := $taxonomy }}
       {{ if gt ($taxonomy.Count) 0 }}
-        <a href="{{ "categories/" | relURL }}{{ $name | urlize }}" class="category-card">
+        {{ $catURL := printf "/categories/%s/" ($name | urlize) | relURL }}
+        <a href="{{ $catURL }}" class="category-card">
           <h3>{{ $name }}</h3>
           <p>{{ $taxonomy.Count }} article{{ if gt ($taxonomy.Count) 1 }}s{{ end }}</p>
         </a>
@@ -59,4 +54,5 @@
     <li>Influential in technology, entertainment, and design</li>
   </ul>
 </section>
+</div>
 {{ end }}
