@@ -11,8 +11,10 @@
     {{ $first := $posts | first 1 }}
     {{ range $first }}
       <article class="card">
+        <div class="card-label">Featured</div>
         <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
         <p>{{ .Description }}</p>
+        <a href="{{ .RelPermalink }}" class="read-more">Read Guide →</a>
       </article>
     {{ end }}
   </div>
