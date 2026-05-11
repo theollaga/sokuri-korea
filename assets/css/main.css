@@ -464,7 +464,7 @@ section {
   margin-top: 4rem;
   padding: 3rem 0;
   border-top: 3px solid var(--color-structure-border);
-  background: var(--color-footer-bg);
+  background: linear-gradient(180deg, var(--color-footer-bg), var(--color-footer-bg-strong));
   box-shadow: var(--shadow-footer);
   color: #666;
   font-size: .95rem;
@@ -809,12 +809,7 @@ section {
 }
 
 
-/* Footer enhancement */
-.site-footer {
-  margin-top: 5rem;
-  border-top: 2px solid var(--color-border);
-  background: var(--color-surface);
-}
+
 .footer-content h3 {
   font-size: 1.15rem;
   margin-bottom: 1rem;
