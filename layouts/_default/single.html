@@ -18,7 +18,8 @@
   </header>
   {{ if .Params.featured_image }}
     <figure>
-      <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" />
+      {{ $alt := .Params.featured_image_alt | default .Title }}
+      <img src="{{ absURL .Params.featured_image }}" alt="{{ $alt }}" />
     </figure>
   {{ end }}
   <div class="content">

@@ -1,6 +1,9 @@
 {{ define "main" }}
 <div class="site-container">
 <section class="hero">
+  {{ with .Params.featured_image }}
+    <img src="{{ absURL . }}" alt="{{ $.Site.Title }}" class="hero-image" loading="lazy" decoding="async" />
+  {{ end }}
   <h1>{{ .Site.Title }}</h1>
   <p>{{ .Site.Params.description }}</p>
 </section>
@@ -25,6 +28,13 @@
       {{ if gt ($taxonomy.Count) 0 }}
         {{ $catURL := printf "/categories/%s/" ($name | urlize) | relURL }}
         <a href="{{ $catURL }}" class="category-card">
+          {{ $catImage := "" }}
+          {{ if in (slice "Culture" "Food" "Language") $name }}
+            {{ $catImage := printf "%s/%s" "https://img-korea.sk-sokuri.com/categories" (($name | urlize) | printf "%s-category.webp") }}
+          {{ end }}
+          {{ if $catImage }}
+                      <img src="{{ $catImage }}" alt="{{ $name }} category" class="category-image" loading="lazy" decoding="async" />
+          {{ end }}
           <h3>{{ $name | title }}</h3>
           <p>{{ $taxonomy.Count }} article{{ if gt ($taxonomy.Count) 1 }}s{{ end }}</p>
         </a>

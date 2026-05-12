@@ -5,6 +5,8 @@ draft: false
 tags: ["Transportation", "Travel Guide", "Foreigners", "Public Transit"]
 categories: ["Transportation"]
 description: "A practical guide for international visitors and residents on using Korea's subway, bus, T-money card, and essential navigation apps."
+featured_image: https://img-korea.sk-sokuri.com/transportation/korean-transportation/korean-transportation-featured.webp
+featured_image_alt: Seoul subway station signage with Korean and English labels.
 ---
 
 South Korea boasts one of the world's most efficient and user-friendly public transportation systems. For foreigners living in or visiting Korea, mastering the subway, bus networks, and the ubiquitous T-money card can greatly enhance mobility and save time. This guide provides detailed, practical information on how to navigate Korea's public transit, including fare payment, etiquette, and recommended apps.

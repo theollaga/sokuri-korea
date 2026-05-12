@@ -5,6 +5,8 @@ draft: false
 tags: ["Hanbok", "Korean Culture", "Traditional Clothing", "Travel Guide", "Foreigners"]
 categories: ["Culture"]
 description: "A practical guide for international visitors to understand hanbok history, meaning, types, rental locations, etiquette, and tips for wearing hanbok in Korea."
+featured_image: https://img-korea.sk-sokuri.com/culture/hanbok/hanbok-guide-featured.webp
+featured_image_alt: Women wearing colorful traditional Korean hanbok.
 ---
 
 Hanbok, the traditional clothing of Korea, represents more than just fabric and design—it embodies centuries of history, cultural values, and aesthetic principles. For international visitors to South Korea, experiencing hanbok offers a tangible connection to Korean heritage. This guide provides practical information about hanbok's origins, cultural significance, various types, where to rent or experience it, and essential etiquette tips.

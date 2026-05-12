@@ -10,6 +10,9 @@
   <ul class="post-list">
     {{ range .Pages }}
         <li>
+          {{ if .Params.featured_image }}
+            <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" class="post-thumb" loading="lazy" decoding="async" />
+          {{ end }}
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
         </li>

@@ -5,6 +5,8 @@ draft: false
 tags: ["Food", "Etiquette", "Foreigners", "Dining"]
 categories: ["Food"]
 description: "A practical guide for international visitors on Korean dining customs, including banchan, sharing dishes, payment practices, and restaurant etiquette."
+featured_image: https://img-korea.sk-sokuri.com/food/korean-dining/korean-dining-featured.webp
+featured_image_alt: People sharing a Korean BBQ meal with side dishes.
 ---
 
 Korean dining culture is communal, vibrant, and deeply rooted in traditions of sharing and respect. For foreigners, understanding the nuances—from the endless refills of banchan to the subtle cues for settling the bill—can turn a simple meal into a rich cultural experience. This guide offers practical, actionable advice on how to navigate Korean restaurants, eat like a local, and avoid common faux pas.

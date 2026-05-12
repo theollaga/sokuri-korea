@@ -10,6 +10,12 @@
   <ul class="taxonomy-list">
     {{ range .Data.Terms }}
       <li>
+        {{ $termTitle := .Page.Title }}
+        {{ $imageMap := dict "Culture" "culture-category.webp" "Food" "food-category.webp" "Language" "language-category.webp" }}
+        {{ if index $imageMap $termTitle }}
+          {{ $imageURL := printf "%s/%s" "https://img-korea.sk-sokuri.com/categories" (index $imageMap $termTitle) }}
+          <img src="{{ $imageURL }}" alt="{{ $termTitle }} category" class="category-image" loading="lazy" decoding="async" />
+        {{ end }}
         <a href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})</a>
       </li>
     {{ end }}

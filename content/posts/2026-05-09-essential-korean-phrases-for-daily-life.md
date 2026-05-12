@@ -5,6 +5,8 @@ draft: false
 tags: ["Language", "Phrases", "Foreigners", "Daily Life"]
 categories: ["Language"]
 description: "A practical guide for international visitors on essential Korean phrases for greetings, shopping, dining, and emergency situations."
+featured_image: https://img-korea.sk-sokuri.com/language/korean-phrases/korean-phrases-featured.webp
+featured_image_alt: Korean phrases and Hangul writing for language learners.
 ---
 
 Learning even a few basic Korean phrases can dramatically improve your experience in Korea. While many Koreans in urban areas speak English, making an effort to communicate in Korean is appreciated and often leads to warmer interactions. This guide provides essential, practical phrases for everyday situations, including greetings, shopping, dining, directions, and emergencies. Each phrase includes the Korean script (Hangul), romanization, and English meaning.
