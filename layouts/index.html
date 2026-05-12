@@ -23,8 +23,8 @@
 <section class="explore">
   <h2>Explore by Category</h2>
   <div class="grid">
-{{ $taxonomy := .Site.Taxonomies.categories }}
-    {{ range $name, $category := $taxonomy }}
+{{ $categories := .Site.Taxonomies.categories }}
+    {{ range $name, $category := $categories }}
       {{ if gt ($category.Count) 0 }}
         {{ $catURL := printf "/categories/%s/" ($name | urlize) | relURL }}
         <a href="{{ $catURL }}" class="category-card">
