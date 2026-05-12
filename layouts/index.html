@@ -24,8 +24,8 @@
   <h2>Explore by Category</h2>
   <div class="grid">
 {{ $taxonomy := .Site.Taxonomies.categories }}
-    {{ range $name, $taxonomy := $taxonomy }}
-      {{ if gt ($taxonomy.Count) 0 }}
+    {{ range $name, $category := $taxonomy }}
+      {{ if gt ($category.Count) 0 }}
         {{ $catURL := printf "/categories/%s/" ($name | urlize) | relURL }}
         <a href="{{ $catURL }}" class="category-card">
           {{ $catImage := "" }}
@@ -36,7 +36,7 @@
                       <img src="{{ $catImage }}" alt="{{ $name }} category" class="category-image" loading="lazy" decoding="async" />
           {{ end }}
           <h3>{{ $name | title }}</h3>
-          <p>{{ $taxonomy.Count }} article{{ if gt ($taxonomy.Count) 1 }}s{{ end }}</p>
+          <p>{{ $category.Count }} article{{ if gt ($category.Count) 1 }}s{{ end }}</p>
         </a>
       {{ end }}
     {{ end }}
