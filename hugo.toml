@@ -15,51 +15,71 @@ imageBaseURL = "https://img-korea.sk-sokuri.com/"
 name = "Home"
 url = "/"
 weight = 1
+[menus.main.params]
+short = "Home"
 
 [[menus.main]]
 name = "Food & Drink"
 url = "/categories/food/"
 weight = 2
+[menus.main.params]
+short = "Food"
 
 [[menus.main]]
 name = "Travel"
 url = "/categories/travel/"
 weight = 3
+[menus.main.params]
+short = "Travel"
 
 [[menus.main]]
 name = "Culture & Lifestyle"
 url = "/categories/culture/"
 weight = 4
+[menus.main.params]
+short = "Culture"
 
 [[menus.main]]
 name = "Language"
 url = "/categories/language/"
 weight = 5
+[menus.main.params]
+short = "Language"
 
 [[menus.main]]
 name = "K-Entertainment"
 url = "/categories/entertainment/"
 weight = 6
+[menus.main.params]
+short = "Entertainment"
 
 [[menus.main]]
 name = "Living in Korea"
 url = "/categories/living/"
 weight = 7
+[menus.main.params]
+short = "Living"
 
 [[menus.main]]
 name = "About"
 url = "/about/"
 weight = 8
+[menus.main.params]
+short = "About"
 
 [[menus.main]]
 name = "Contact"
 url = "/contact/"
 weight = 9
+[menus.main.params]
+short = "Contact"
 
 [[menus.main]]
 name = "Privacy Policy"
 url = "/privacy-policy/"
 weight = 10
+[menus.main.params]
+short = "Privacy"
 
 [caches]
   [caches.assets]

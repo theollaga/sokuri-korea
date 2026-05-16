@@ -3,15 +3,16 @@
     <div class="footer-content">
       <div>
         <h3>Sokuri Korea</h3>
-        <p>Insights into Korean culture, language, and daily life for foreigners.</p>
+        <p>Insights into Korean food, travel, culture, language, entertainment, and life in Korea for international readers.</p>
       </div>
       <div>
         <h3>Explore</h3>
         <ul>
-          <li><a href="/categories/culture/">Culture</a></li>
-          <li><a href="/categories/food/">Food</a></li>
-          <li><a href="/categories/language/">Language</a></li>
-          <li><a href="/categories/transportation/">Transportation</a></li>
+          {{ range .Site.Menus.main }}
+            {{ if hasPrefix .URL "/categories/" }}
+              <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+            {{ end }}
+          {{ end }}
         </ul>
       </div>
       <div>
