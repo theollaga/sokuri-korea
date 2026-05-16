@@ -35,8 +35,8 @@
         <a href="{{ $catURL }}" class="category-card">
           {{ $catImage := "" }}
           {{ $lowerName := lower $name }}
-          {{ if in (slice "culture" "food" "language" "travel" "transportation" "modern-korea") $lowerName }}
-            {{ $catImage = printf "https://img-korea.sk-sokuri.com/categories/%s-category.webp" ($lowerName | urlize) }}
+          {{ if in (slice "culture" "food" "language" "travel" "entertainment" "living") $lowerName }}
+            {{ $catImage = printf "https://img-korea.sk-sokuri.com/categories/%s/%s-category.webp" ($lowerName | urlize) ($lowerName | urlize) }}
           {{ end }}
           {{ if $catImage }}
                       <img src="{{ $catImage }}" alt="{{ $name }} category" class="category-image" loading="lazy" decoding="async" />
