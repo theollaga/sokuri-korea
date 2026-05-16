@@ -1233,4 +1233,68 @@ img {
     gap: 1rem;
   }
 }
+/* ===== Header 2-row layout ===== */
+.site-header {
+  border-bottom: 1px solid var(--color-structure-border);
+  background: var(--color-header-bg, transparent);
+}
+
+.header-top {
+  text-align: center;
+  padding: 1.5rem 0 0.75rem 0;
+}
+
+.site-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.site-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.site-nav {
+  border-top: 1px solid var(--color-structure-border);
+  padding: 0.5rem 0;
+}
+
+.site-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.75rem;
+}
+
+.site-nav a {
+  color: var(--color-text, #2a2a2a);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.4rem 0;
+  transition: color 0.2s ease;
+}
+
+.site-nav a:hover {
+  color: var(--color-accent, #c0392b);
+}
+
+@media (max-width: 768px) {
+  .site-title { font-size: 1.2rem; }
+  .header-top { padding: 1rem 1rem 0.5rem 1rem; }
+  .site-nav ul {
+    gap: 0.4rem 1rem;
+    padding: 0 0.5rem;
+    font-size: 0.85rem;
+  }
+  .site-nav a {
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+  }
+}
 

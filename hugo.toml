@@ -60,27 +60,6 @@ weight = 7
 [menus.main.params]
 short = "Living"
 
-[[menus.main]]
-name = "About"
-url = "/about/"
-weight = 8
-[menus.main.params]
-short = "About"
-
-[[menus.main]]
-name = "Contact"
-url = "/contact/"
-weight = 9
-[menus.main.params]
-short = "Contact"
-
-[[menus.main]]
-name = "Privacy Policy"
-url = "/privacy-policy/"
-weight = 10
-[menus.main.params]
-short = "Privacy"
-
 [caches]
   [caches.assets]
     dir = ":cacheDir/assets"
