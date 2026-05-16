@@ -9,6 +9,11 @@
 </section>
 <section class="featured">
   <h2>Featured Guide</h2>
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ $first_post := index $posts 0 }}
+  {{ with $first_post.Params.featured_image }}
+    <img src="{{ absURL . }}" alt="{{ $first_post.Title }}" class="featured-image" loading="lazy" decoding="async" />
+  {{ end }}
   <div class="grid">
     {{ $posts := where .Site.RegularPages "Section" "posts" }}
     {{ $first := $posts | first 1 }}
@@ -29,8 +34,9 @@
         {{ $catURL := printf "/categories/%s/" ($name | urlize) | relURL }}
         <a href="{{ $catURL }}" class="category-card">
           {{ $catImage := "" }}
-          {{ if in (slice "Culture" "Food" "Language") $name }}
-            {{ $catImage := printf "%s/%s" "https://img-korea.sk-sokuri.com/categories" (($name | urlize) | printf "%s-category.webp") }}
+          {{ $lowerName := lower $name }}
+          {{ if in (slice "culture" "food" "language" "travel" "transportation" "modern-korea") $lowerName }}
+            {{ $catImage = printf "https://img-korea.sk-sokuri.com/categories/%s-category.webp" ($lowerName | urlize) }}
           {{ end }}
           {{ if $catImage }}
                       <img src="{{ $catImage }}" alt="{{ $name }} category" class="category-image" loading="lazy" decoding="async" />
@@ -49,6 +55,9 @@
     {{ $first := $posts | first 5 }}
     {{ range $first }}
       <li>
+        {{ if .Params.featured_image }}
+          <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" class="post-thumb" loading="lazy" decoding="async" />
+        {{ end }}
         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
       </li>

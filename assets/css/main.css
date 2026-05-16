@@ -884,4 +884,44 @@ section {
   }
 }
 
+/* ===== Image sizing (responsive) ===== */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-image {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  width: 100%;
+}
+
+.category-card img,
+.card img,
+.featured img,
+.featured-image,
+.post-thumb {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  width: 100%;
+}
+
+.post figure img,
+.content img {
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    aspect-ratio: 3/2;
+  }
+  .category-card img,
+  .card img,
+  .featured img,
+  .featured-image,
+  .post-thumb {
+    aspect-ratio: 4/3;
+  }
+}
 
