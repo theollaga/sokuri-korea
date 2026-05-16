@@ -8,15 +8,20 @@
   </header>
 
   <ul class="taxonomy-list">
-    {{ range .Data.Terms }}
+    {{ range .Data.Terms.Alphabetical }}
       <li>
-        {{ $termTitle := .Page.Title }}
-        {{ $imageMap := dict "Culture" "culture-category.webp" "Food" "food-category.webp" "Language" "language-category.webp" }}
-        {{ if index $imageMap $termTitle }}
-          {{ $imageURL := printf "%s/%s" "https://img-korea.sk-sokuri.com/categories" (index $imageMap $termTitle) }}
-          <img src="{{ $imageURL }}" alt="{{ $termTitle }} category" class="category-image" loading="lazy" decoding="async" />
+        {{ $termName := .Name }}
+        {{ $termSlug := $termName | urlize }}
+        {{ $supportedCategories := slice "culture" "food" "language" "travel" "transportation" "modern-korea" }}
+        {{ if in $supportedCategories $termSlug }}
+          {{ $imageURL := printf "https://img-korea.sk-sokuri.com/categories/%s-category.webp" $termSlug }}
+          <img src="{{ $imageURL }}" 
+               alt="{{ $termName }} category" 
+               class="category-image" 
+               loading="lazy" 
+               decoding="async" />
         {{ end }}
-        <a href="{{ .Page.Permalink }}">{{ .Page.Title }} ({{ .Count }})</a>
+        <a href="{{ .Page.Permalink }}">{{ $termName }} ({{ .Count }})</a>
       </li>
     {{ end }}
   </ul>
