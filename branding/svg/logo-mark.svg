@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- 베이지 배경 원 (사이트 톤) -->
+  <circle cx="256" cy="256" r="248" fill="#fdf6e3" stroke="#d8c7a8" stroke-width="4"/>
+  <!-- 태극 단순화: 빨강(위) + 네이비(아래), S자 곡선 분할 -->
+  <g transform="translate(256,256)">
+    <!-- 빨강 반쪽 -->
+    <path d="M -180,0 A 180,180 0 0,1 180,0 A 90,90 0 0,1 0,0 A 90,90 0 0,0 -180,0 Z" 
+          fill="#c8102e"/>
+    <!-- 네이비 반쪽 -->
+    <path d="M 180,0 A 180,180 0 0,1 -180,0 A 90,90 0 0,1 0,0 A 90,90 0 0,0 180,0 Z" 
+          fill="#2c3e50"/>
+    <!-- 작은 골드 점 (전통 매듭 느낌의 액센트) -->
+    <circle cx="-90" cy="0" r="14" fill="#d4af37"/>
+    <circle cx="90" cy="0" r="14" fill="#fdf6e3"/>
+  </g>
+</svg>

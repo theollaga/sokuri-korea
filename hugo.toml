@@ -23,7 +23,7 @@ authorBio = "Sokuri Korea is an editorial team sharing practical, well-researche
 authorURL = "/about/"
 authorAvatar = ""
 publisherName = "Sokuri Korea"
-publisherLogo = "https://img-korea.sk-sokuri.com/branding/logo.webp"
+publisherLogo = "https://img-korea.sk-sokuri.com/branding/logo-mark.webp"
 
 # 콘텐츠 옵션
 showReadingTime = true

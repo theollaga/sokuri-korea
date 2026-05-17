@@ -1,17 +1,11 @@
-public/
-resources/_gen/
-.hugo_build.lock
-.env
-.env.*
-node_modules/
-.DS_Store
 # Build output
 public/
 resources/_gen/
 .hugo_build.lock
 
 # Environment / local files
-.env*
+.env
+.env.*
 node_modules/
 .DS_Store
 
@@ -19,5 +13,10 @@ node_modules/
 hugo_bin
 hugo_*.tar.gz
 *.deb
+
+# Backup files
 *.bak
+*.bak.*
+
+# Editor
 *.code-workspace

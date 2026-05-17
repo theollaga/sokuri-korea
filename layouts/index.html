@@ -4,12 +4,13 @@
   {{- /* ============================== */ -}}
   {{- /* HERO                            */ -}}
   {{- /* ============================== */ -}}
-  <section class="hero">
-    {{ with .Params.featured_image }}
-      <img src="{{ absURL . }}" alt="{{ $.Params.featured_image_alt | default $.Site.Title }}" class="hero-image" loading="lazy" decoding="async" />
-    {{ end }}
-    <h1>{{ .Site.Title }}</h1>
-    <p>{{ .Site.Params.description }}</p>
+  <section class="hero hero-editorial">
+    <h1 class="hero-headline">Food · Travel · Language · Life</h1>
+    <p class="hero-sub">The outsider's guide to Korea &mdash; honest, researched, and made for the people just discovering it.</p>
+    <div class="hero-cta">
+      <a href="/posts/" class="btn btn-primary">Start exploring &rarr;</a>
+      <a href="/about/" class="btn btn-ghost">About Sokuri</a>
+    </div>
   </section>
 
   {{- /* ============================== */ -}}

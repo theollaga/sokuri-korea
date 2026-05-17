@@ -1,7 +1,14 @@
 <header class="site-header">
   <div class="site-container">
     <div class="header-top">
-      <h1 class="site-title"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+      <a href="{{ .Site.BaseURL }}" class="site-brand" aria-label="{{ .Site.Title }} home">
+        <img src="https://img-korea.sk-sokuri.com/branding/logo-horizontal.webp"
+             alt="{{ .Site.Title }} logo"
+             class="site-logo"
+             width="180" height="48"
+             loading="eager"
+             decoding="async">
+      </a>
     </div>
     <nav class="site-nav">
       <ul>

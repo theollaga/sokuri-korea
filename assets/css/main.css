@@ -153,22 +153,6 @@ a:hover {
     0 4px 12px rgba(0,0,0,0.08);
 }
 
-.hero h1 {
-  margin: 0 0 1rem;
-  color: var(--color-heading);
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.hero p {
-  max-width: 640px;
-  margin: 0 auto;
-  color: #4a4a4a;
-  font-size: 1.2rem;
-  line-height: 1.6;
-}
-
 /* Sections */
 section {
   margin-bottom: 2.8rem;
@@ -856,12 +840,6 @@ section {
     grid-template-columns: 1fr;
   }
   /* Additional mobile tweaks */
-  .hero h1 {
-    font-size: clamp(2rem, 9vw, 2.8rem);
-  }
-  .hero p {
-    font-size: 1.1rem;
-  }
   .featured .card,
   .category-card {
     padding: 1rem;
@@ -1298,3 +1276,151 @@ img {
   }
 }
 
+
+/* === Site Brand Logo (Phase 3) === */
+.site-brand { display: inline-flex; align-items: center; text-decoration: none; }
+.site-brand:hover { opacity: 0.85; }
+.site-logo { height: 48px; width: auto; display: block; }
+@media (max-width: 480px) {
+  .site-logo { height: 40px; }
+}
+
+/* === Text-only Hero (Phase 3) === */
+.hero-text {
+  text-align: center;
+  padding: 3rem 1.5rem 2.5rem;
+  max-width: var(--container-wide);
+  margin: 0 auto 2.5rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+.hero-title {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-heading);
+  margin: 0 0 1rem;
+}
+.hero-tagline {
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  line-height: 1.65;
+  color: var(--color-muted);
+  max-width: 600px;
+  margin: 0 auto 1.75rem;
+}
+.hero-cta {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1.5px solid transparent;
+}
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-heading);
+  border-color: var(--color-border);
+}
+.btn-ghost:hover {
+  background: var(--color-surface);
+  border-color: var(--color-heading);
+}
+@media (max-width: 480px) {
+  .hero-text { padding: 2rem 1rem 1.75rem; margin-bottom: 1.5rem; }
+  .hero-tagline { margin-bottom: 1.5rem; }
+  .hero-cta { flex-direction: column; align-items: stretch; max-width: 280px; margin: 0.5rem auto 0; }
+}
+
+/* === Hero Editorial (Phase 3 restore) === */
+.hero.hero-editorial {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: var(--container-wide);
+  padding: 4rem 1.5rem 3rem;
+  text-align: center;
+  margin: 0 auto 2.5rem;
+  border-bottom: 2px solid var(--color-border-strong, #d4c5a0);
+}
+.hero-headline {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--color-heading);
+  margin: 0 0 1rem;
+}
+.hero-sub {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.65;
+  color: var(--color-muted);
+  max-width: 620px;
+  margin: 0 auto 1.75rem;
+}
+.hero-cta {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary:hover { color: #fff; }
+.btn-ghost:hover { color: var(--color-heading); }
+@media (max-width: 480px) {
+  .hero.hero-editorial { padding: 2.5rem 1rem 2rem; }
+  .hero-headline { letter-spacing: -0.01em; }
+  .hero-sub { margin-bottom: 1.5rem; }
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; }
+}
+
+/* ===== Mobile Latest Articles fix (under 640px) ===== */
+@media (max-width: 639px) {
+  .latest .post-list li,
+  .post-list li {
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+  }
+  .latest .post-list li .post-thumb,
+  .post-list li .post-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: var(--radius-card, 8px);
+    margin: 0;
+  }
+  .latest .post-list li a,
+  .post-list li a {
+    flex: 0 0 auto;
+    margin-left: 0;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    color: var(--color-heading);
+    text-decoration: none;
+    display: block;
+  }
+  .latest .post-list li time,
+  .post-list li time {
+    margin-left: 0;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+  }
+}

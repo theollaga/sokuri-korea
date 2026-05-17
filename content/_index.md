@@ -4,8 +4,8 @@ description: "Discover Korean food, travel, culture, language, entertainment, an
 date: 2026-05-09
 lastmod: 2026-05-17
 draft: false
-featured_image: https://img-korea.sk-sokuri.com/categories/culture/culture-category.webp
-featured_image_alt: Korean cultural heritage representing the spirit of Sokuri Korea.
+featured_image: https://img-korea.sk-sokuri.com/branding/og-default.webp
+featured_image_alt: Sokuri Korea — The Heart of Korean Culture
 ---
 
 Sokuri Korea is your friendly guide to understanding Korea from the inside out. We provide clear, practical information for foreigners living abroad or visiting for the first time — from must-try street foods and travel essentials to language tips and what daily life really looks like in modern Korea.

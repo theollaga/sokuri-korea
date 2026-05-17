@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- 베이지 배경 -->
+  <rect width="1200" height="630" fill="#fdf6e3"/>
+  <!-- 미묘한 한지 텍스처 느낌 (얇은 격자) -->
+  <g opacity="0.04" stroke="#2c3e50" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+  </g>
+  <!-- 상단 골드 라인 -->
+  <rect x="0" y="0" width="1200" height="6" fill="#d4af37"/>
+  <!-- 중앙 심볼 -->
+  <g transform="translate(600,240)">
+    <circle cx="0" cy="0" r="100" fill="#fffaf0" stroke="#d8c7a8" stroke-width="3"/>
+    <g>
+      <path d="M -72,0 A 72,72 0 0,1 72,0 A 36,36 0 0,1 0,0 A 36,36 0 0,0 -72,0 Z" 
+            fill="#c8102e"/>
+      <path d="M 72,0 A 72,72 0 0,1 -72,0 A 36,36 0 0,1 0,0 A 36,36 0 0,0 72,0 Z" 
+            fill="#2c3e50"/>
+      <circle cx="-36" cy="0" r="7" fill="#d4af37"/>
+      <circle cx="36" cy="0" r="7" fill="#fdf6e3"/>
+    </g>
+  </g>
+  <!-- 중앙 텍스트 "Sokuri" -->
+  <text x="600" y="430" font-family="Georgia, 'Times New Roman', serif" 
+        font-size="100" font-weight="700" fill="#2c3e50" 
+        text-anchor="middle" letter-spacing="-2">Sokuri</text>
+  <!-- 슬로건 -->
+  <text x="600" y="490" font-family="'Helvetica Neue', Arial, sans-serif" 
+        font-size="26" font-weight="400" fill="#5d6d7e" 
+        text-anchor="middle" letter-spacing="3">
+    THE HEART OF KOREAN CULTURE
+  </text>
+  <!-- 하단 URL -->
+  <text x="600" y="580" font-family="'Helvetica Neue', Arial, sans-serif" 
+        font-size="18" font-weight="500" fill="#c8102e" 
+        text-anchor="middle" letter-spacing="2">
+    korea.sk-sokuri.com
+  </text>
+  <!-- 하단 골드 라인 -->
+  <rect x="0" y="624" width="1200" height="6" fill="#d4af37"/>
+</svg>

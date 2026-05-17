@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  <!-- 좌측 심볼 (작은 버전) -->
+  <g transform="translate(80,80)">
+    <circle cx="0" cy="0" r="62" fill="#fdf6e3" stroke="#d8c7a8" stroke-width="2"/>
+    <g>
+      <path d="M -45,0 A 45,45 0 0,1 45,0 A 22.5,22.5 0 0,1 0,0 A 22.5,22.5 0 0,0 -45,0 Z" 
+            fill="#c8102e"/>
+      <path d="M 45,0 A 45,45 0 0,1 -45,0 A 22.5,22.5 0 0,1 0,0 A 22.5,22.5 0 0,0 45,0 Z" 
+            fill="#2c3e50"/>
+      <circle cx="-22.5" cy="0" r="4" fill="#d4af37"/>
+      <circle cx="22.5" cy="0" r="4" fill="#fdf6e3"/>
+    </g>
+  </g>
+  <!-- 우측 텍스트 "Sokuri" -->
+  <text x="170" y="80" font-family="Georgia, 'Times New Roman', serif" 
+        font-size="62" font-weight="700" fill="#2c3e50" 
+        dominant-baseline="middle" letter-spacing="-1">Sokuri</text>
+  <!-- 슬로건 -->
+  <text x="172" y="120" font-family="'Helvetica Neue', Arial, sans-serif" 
+        font-size="16" font-weight="400" fill="#5d6d7e" letter-spacing="1.5">
+    THE HEART OF KOREAN CULTURE
+  </text>
+</svg>
