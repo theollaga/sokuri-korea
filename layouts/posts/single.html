@@ -1,0 +1,227 @@
+{{ define "main" }}
+<article class="post">
+
+  {{- /* ============================== */ -}}
+  {{- /* BREADCRUMB                      */ -}}
+  {{- /* ============================== */ -}}
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ .Site.BaseURL }}">Home</a></li>
+      {{ with .Params.categories }}
+        {{ $cat := index . 0 }}
+        {{ $catSlug := $cat | urlize }}
+        <li><a href="{{ printf "/categories/%s/" $catSlug | relURL }}">{{ $cat }}</a></li>
+      {{ end }}
+      <li aria-current="page">{{ .Title }}</li>
+    </ol>
+  </nav>
+
+  {{- /* ============================== */ -}}
+  {{- /* POST HEADER                     */ -}}
+  {{- /* ============================== */ -}}
+  <header class="post-header">
+
+    {{- /* Category badge */ -}}
+    {{ with .Params.categories }}
+      <div class="post-categories">
+        {{ range . }}
+          {{ $catSlug := . | urlize }}
+          <a href="{{ printf "/categories/%s/" $catSlug | relURL }}" class="category-badge">{{ . }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    <h1 class="post-title">{{ .Title }}</h1>
+
+    {{ with .Description }}
+      <p class="post-description">{{ . }}</p>
+    {{ end }}
+
+    {{- /* Post meta: date, reading time, author */ -}}
+    <div class="post-meta">
+      <span class="post-author">
+        By <a href="{{ .Site.Params.authorURL | default "/about/" }}" rel="author">{{ .Site.Params.author }}</a>
+      </span>
+      <span class="meta-sep">·</span>
+      <time datetime="{{ .Date.Format "2006-01-02" }}" class="post-date">
+        Published {{ .Date.Format "January 2, 2006" }}
+      </time>
+      {{ if and .Site.Params.showLastModified .Lastmod (ne (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+        <span class="meta-sep">·</span>
+        <time datetime="{{ .Lastmod.Format "2006-01-02" }}" class="post-updated">
+          Updated {{ .Lastmod.Format "January 2, 2006" }}
+        </time>
+      {{ end }}
+      {{ if .Site.Params.showReadingTime }}
+        <span class="meta-sep">·</span>
+        <span class="post-reading-time">{{ .ReadingTime }} min read</span>
+      {{ end }}
+    </div>
+
+    {{- /* AI transparency notice */ -}}
+    {{ if .Site.Params.aiAssisted }}
+      <p class="ai-notice" title="See our Disclaimer page for details">
+        <span class="ai-notice-icon" aria-hidden="true">ⓘ</span>
+        {{ .Site.Params.aiNoticeText }} — <a href="/disclaimer/">learn more</a>
+      </p>
+    {{ end }}
+
+  </header>
+
+  {{- /* ============================== */ -}}
+  {{- /* FEATURED IMAGE                  */ -}}
+  {{- /* ============================== */ -}}
+  {{ if .Params.featured_image }}
+    <figure class="post-featured">
+      {{ $alt := .Params.featured_image_alt | default .Title }}
+      <img src="{{ absURL .Params.featured_image }}" alt="{{ $alt }}" loading="eager" decoding="async" width="1200" height="630" />
+      {{ if or .Params.featured_image_caption .Params.featured_image_credit }}
+        <figcaption>
+          {{ with .Params.featured_image_caption }}<span class="figcaption-text">{{ . }}</span>{{ end }}
+          {{ with .Params.featured_image_credit }}
+            <span class="figcaption-credit">
+              {{ if .url }}
+                Photo by <a href="{{ .url }}" rel="nofollow noopener" target="_blank">{{ .name }}</a>{{ with .source }} on {{ . }}{{ end }}
+              {{ else }}
+                Photo by {{ .name }}{{ with .source }} on {{ . }}{{ end }}
+              {{ end }}
+            </span>
+          {{ end }}
+        </figcaption>
+      {{ end }}
+    </figure>
+  {{ end }}
+
+  {{- /* ============================== */ -}}
+  {{- /* TABLE OF CONTENTS               */ -}}
+  {{- /* ============================== */ -}}
+  {{ if and .Site.Params.showTOC (.Param "toc" | default true) .TableOfContents }}
+    <aside class="post-toc" aria-label="Table of contents">
+      <details open>
+        <summary><strong>Table of Contents</strong></summary>
+        {{ .TableOfContents }}
+      </details>
+    </aside>
+  {{ end }}
+
+  {{- /* ============================== */ -}}
+  {{- /* MAIN CONTENT                    */ -}}
+  {{- /* ============================== */ -}}
+  <div class="post-content">
+    {{ .Content }}
+  </div>
+
+  {{- /* ============================== */ -}}
+  {{- /* TAGS                            */ -}}
+  {{- /* ============================== */ -}}
+  {{ with .Params.tags }}
+    <div class="post-tags" aria-label="Tags">
+      <span class="tags-label">Tags:</span>
+      {{ range . }}
+        {{ $tagSlug := . | urlize }}
+        <a href="{{ printf "/tags/%s/" $tagSlug | relURL }}" class="tag-badge">#{{ . }}</a>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{- /* ============================== */ -}}
+  {{- /* SHARE BUTTONS                   */ -}}
+  {{- /* ============================== */ -}}
+  {{ if .Site.Params.showShareButtons }}
+    {{ $url := .Permalink }}
+    {{ $title := .Title }}
+    {{ $img := .Params.featured_image | default .Site.Params.defaultOgImage }}
+    <div class="post-share" aria-label="Share this post">
+      <span class="share-label">Share:</span>
+      <ul>
+        {{ if .Site.Params.shareTwitter }}
+          <li>
+            <a href="https://twitter.com/intent/tweet?text={{ $title }}&url={{ $url }}"
+               target="_blank" rel="noopener nofollow"
+               class="share-btn share-x" aria-label="Share on X (Twitter)">X</a>
+          </li>
+        {{ end }}
+        {{ if .Site.Params.shareFacebook }}
+          <li>
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{ $url }}"
+               target="_blank" rel="noopener nofollow"
+               class="share-btn share-facebook" aria-label="Share on Facebook">Facebook</a>
+          </li>
+        {{ end }}
+        {{ if .Site.Params.sharePinterest }}
+          <li>
+            <a href="https://pinterest.com/pin/create/button/?url={{ $url }}&media={{ $img | absURL }}&description={{ $title }}"
+               target="_blank" rel="noopener nofollow"
+               class="share-btn share-pinterest" aria-label="Share on Pinterest">Pinterest</a>
+          </li>
+        {{ end }}
+        {{ if .Site.Params.shareLinkCopy }}
+          <li>
+            <button type="button" class="share-btn share-copy" data-url="{{ $url }}" aria-label="Copy link">Copy link</button>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ end }}
+
+  {{- /* ============================== */ -}}
+  {{- /* AUTHOR BOX                      */ -}}
+  {{- /* ============================== */ -}}
+  {{ if .Site.Params.showAuthorBox }}
+    <aside class="author-box" aria-label="About the author">
+      {{ with .Site.Params.authorAvatar }}
+        <img src="{{ . }}" alt="{{ $.Site.Params.author }}" class="author-avatar" loading="lazy" decoding="async" width="80" height="80" />
+      {{ end }}
+      <div class="author-body">
+        <h3 class="author-name"><a href="{{ .Site.Params.authorURL | default "/about/" }}">{{ .Site.Params.author }}</a></h3>
+        <p class="author-bio">{{ .Site.Params.authorBio }}</p>
+      </div>
+    </aside>
+  {{ end }}
+
+  {{- /* ============================== */ -}}
+  {{- /* RELATED POSTS                   */ -}}
+  {{- /* ============================== */ -}}
+  {{ if .Site.Params.showRelatedPosts }}
+    {{ $related := .Site.RegularPages.Related . | first 3 }}
+    {{ if $related }}
+      <section class="related-posts" aria-label="Related posts">
+        <h2>Related Guides</h2>
+        <ul class="related-list">
+          {{ range $related }}
+            <li>
+              {{ if .Params.featured_image }}
+                <a href="{{ .RelPermalink }}">
+                  <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" class="related-thumb" loading="lazy" decoding="async" />
+                </a>
+              {{ end }}
+              <div class="related-body">
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                {{ with .Description }}<p>{{ . }}</p>{{ end }}
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
+  {{ end }}
+
+</article>
+
+{{- /* Copy-to-clipboard script for share button */ -}}
+{{ if and .Site.Params.showShareButtons .Site.Params.shareLinkCopy }}
+<script>
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('.share-copy');
+  if (!btn) return;
+  var url = btn.getAttribute('data-url');
+  navigator.clipboard.writeText(url).then(function() {
+    var orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = orig; }, 1500);
+  });
+});
+</script>
+{{ end }}
+
+{{ end }}

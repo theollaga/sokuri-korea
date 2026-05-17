@@ -21,7 +21,7 @@ twitterHandle = "@sokurikorea"
 author = "Sokuri Korea Editorial Team"
 authorBio = "Sokuri Korea is an editorial team sharing practical, well-researched guides about Korean culture, food, travel, language, and daily life for international readers."
 authorURL = "/about/"
-authorAvatar = "https://img-korea.sk-sokuri.com/branding/author-avatar.webp"
+authorAvatar = ""
 publisherName = "Sokuri Korea"
 publisherLogo = "https://img-korea.sk-sokuri.com/branding/logo.webp"
 

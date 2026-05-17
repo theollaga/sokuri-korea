@@ -1,29 +1,41 @@
 {{ define "main" }}
 <div class="site-container">
   <header class="page-header">
-    <h1 class="page-title">{{ .Title }}</h1>
-    {{ if .Description }}
-      <p class="page-description">{{ .Description }}</p>
-    {{ end }}
+    <h1 class="page-title">{{ .Title | default "All Categories" }}</h1>
+    <p class="page-description">
+      Browse all guides organized by topic. Discover Korean food, travel, culture, language, entertainment, and daily life — practical insights for international readers.
+    </p>
   </header>
 
-  <ul class="taxonomy-list">
-    {{ range .Data.Terms.Alphabetical }}
-      <li>
-        {{ $termName := .Name }}
-        {{ $termSlug := $termName | urlize }}
-        {{ $supportedCategories := slice "culture" "food" "language" "travel" "entertainment" "living" }}
-        {{ if in $supportedCategories $termSlug }}
-          {{ $imageURL := printf "https://img-korea.sk-sokuri.com/categories/%s/%s-category.webp" $termSlug $termSlug }}
-          <img src="{{ $imageURL }}"
-               alt="{{ $termName }} category"
-               class="category-image"
-               loading="lazy"
-               decoding="async" />
-        {{ end }}
-        <a href="{{ .Page.Permalink }}">{{ $termName | title }} ({{ .Count }})</a>
-      </li>
+  <div class="grid category-grid">
+    {{- $categoryDefs := slice
+      (dict "slug" "food" "name" "Food & Drink" "desc" "Korean cuisine, dining etiquette, street food, cafés, and drinking culture.")
+      (dict "slug" "travel" "name" "Travel" "desc" "Destinations, transportation, itineraries, and practical travel tips for visitors.")
+      (dict "slug" "culture" "name" "Culture & Lifestyle" "desc" "Traditions, holidays, daily life, etiquette, and modern lifestyle explained for foreigners.")
+      (dict "slug" "language" "name" "Language" "desc" "Korean phrases, hangul basics, pronunciation, and everyday vocabulary for learners.")
+      (dict "slug" "entertainment" "name" "K-Entertainment" "desc" "K-pop, K-dramas, films, concerts, fan culture, and entertainment industry insights.")
+      (dict "slug" "living" "name" "Living in Korea" "desc" "Visa, housing, healthcare, banking, work, and daily living tips for expats and long-term visitors.")
+    -}}
+    {{ range $categoryDefs }}
+      {{ $slug := .slug }}
+      {{ $name := .name }}
+      {{ $desc := .desc }}
+      {{ $taxonomy := index $.Site.Taxonomies.categories $name }}
+      {{ $count := 0 }}
+      {{ if $taxonomy }}{{ $count = $taxonomy.Count }}{{ end }}
+      {{ $catURL := printf "/categories/%s/" $slug }}
+      {{ $catImage := printf "https://img-korea.sk-sokuri.com/categories/%s/%s-category.webp" $slug $slug }}
+      <a href="{{ $catURL }}" class="category-card">
+        <img src="{{ $catImage }}" alt="{{ $name }} category" class="category-image" loading="lazy" decoding="async" />
+        <div class="category-body">
+          <h3>{{ $name }}</h3>
+          <p class="category-desc">{{ $desc }}</p>
+          <p class="category-count">
+            {{ if eq $count 0 }}Coming soon{{ else }}{{ $count }} article{{ if gt $count 1 }}s{{ end }}{{ end }}
+          </p>
+        </div>
+      </a>
     {{ end }}
-  </ul>
+  </div>
 </div>
 {{ end }}
