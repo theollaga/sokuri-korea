@@ -1,0 +1,14 @@
+{{- /*
+  korean-term — display Korean word with romanization and pronunciation
+  Usage (inline):
+    {{< korean-term hangul="지하철" romanized="jihacheol" pronunciation="jee-ha-chul" meaning="subway" >}}
+*/ -}}
+{{- $hangul := .Get "hangul" -}}
+{{- $romanized := .Get "romanized" -}}
+{{- $pronunciation := .Get "pronunciation" -}}
+{{- $meaning := .Get "meaning" -}}
+<span class="korean-term">
+  <span class="kt-hangul" lang="ko">{{ $hangul }}</span>
+  {{ with $romanized }}<span class="kt-romanized">({{ . }}{{ with $pronunciation }}, <em>{{ . }}</em>{{ end }})</span>{{ end }}
+  {{ with $meaning }}<span class="kt-meaning"> — {{ . }}</span>{{ end }}
+</span>

@@ -1,0 +1,16 @@
+{{- /*
+  key-takeaways — what readers will learn
+  Usage:
+    {{< key-takeaways >}}
+    - First point
+    - Second point
+    - Third point
+    {{< /key-takeaways >}}
+*/ -}}
+<aside class="key-takeaways" aria-label="Key takeaways">
+  <h2 class="kt-title">
+    <span class="kt-icon" aria-hidden="true">★</span>
+    Key Takeaways
+  </h2>
+  <div class="kt-body">{{ .Inner | $.Page.RenderString }}</div>
+</aside>

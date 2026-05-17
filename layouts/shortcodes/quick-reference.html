@@ -1,0 +1,18 @@
+{{- /*
+  quick-reference — summary card at end of post
+  Usage:
+    {{< quick-reference title="Seoul Subway Quick Reference" >}}
+    - **Operating hours:** 5:30 AM – midnight
+    - **Fare:** From ₩1,400
+    - **Best card:** T-money
+    - **Apps:** Subway Korea, KakaoMap
+    {{< /quick-reference >}}
+*/ -}}
+{{- $title := .Get "title" | default "Quick Reference" -}}
+<aside class="quick-reference" aria-label="{{ $title }}">
+  <h2 class="qr-title">
+    <span class="qr-icon" aria-hidden="true">📌</span>
+    {{ $title }}
+  </h2>
+  <div class="qr-body">{{ .Inner | $.Page.RenderString }}</div>
+</aside>

@@ -7,34 +7,41 @@
     {{ end }}
   </header>
 
-  <ul class="post-list">
-    {{ range .Pages }}
-      <li>
-        {{ if .Params.featured_image }}
-          <img src="{{ absURL .Params.featured_image }}" 
-               alt="{{ .Params.featured_image_alt | default .Title }}" 
-               class="post-thumb" 
-               loading="lazy" 
-               decoding="async" />
-        {{ end }}
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        {{ with .Description }}
-          <p class="post-summary">{{ . }}</p>
-        {{ end }}
-        <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-      </li>
-    {{ end }}
-  </ul>
+  {{ if .Pages }}
+    <ul class="post-list">
+      {{ range .Pages }}
+        <li>
+          {{ if .Params.featured_image }}
+            <img src="{{ absURL .Params.featured_image }}"
+                 alt="{{ .Params.featured_image_alt | default .Title }}"
+                 class="post-thumb"
+                 loading="lazy"
+                 decoding="async" />
+          {{ end }}
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          {{ with .Description }}
+            <p class="post-summary">{{ . }}</p>
+          {{ end }}
+          <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        </li>
+      {{ end }}
+    </ul>
 
-  {{ if .Paginator }}
-    <nav class="pagination">
-      {{ if .Paginator.HasPrev }}
-        <a href="{{ .Paginator.Prev.URL }}">&laquo; Prev</a>
-      {{ end }}
-      {{ if .Paginator.HasNext }}
-        <a href="{{ .Paginator.Next.URL }}">Next &raquo;</a>
-      {{ end }}
-    </nav>
+    {{ if .Paginator }}
+      <nav class="pagination">
+        {{ if .Paginator.HasPrev }}
+          <a href="{{ .Paginator.Prev.URL }}">&laquo; Prev</a>
+        {{ end }}
+        {{ if .Paginator.HasNext }}
+          <a href="{{ .Paginator.Next.URL }}">Next &raquo;</a>
+        {{ end }}
+      </nav>
+    {{ end }}
+  {{ else }}
+    <div class="empty-state">
+      <p>No articles published in this section yet — new guides are being prepared.</p>
+      <p><a href="/" class="empty-state-link">Return to home</a></p>
+    </div>
   {{ end }}
 </div>
 {{ end }}

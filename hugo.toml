@@ -11,6 +11,38 @@ pagerSize = 10
 description = "Discover Korean food, travel, culture, language, entertainment, and life in Korea through practical guides for international readers."
 imageBaseURL = "https://img-korea.sk-sokuri.com/"
 
+# 사이트 메타 정보
+siteName = "Sokuri Korea"
+siteShortName = "Sokuri"
+defaultOgImage = "https://img-korea.sk-sokuri.com/branding/og-default.webp"
+twitterHandle = "@sokurikorea"
+
+# Author / Publisher 정보 (Schema.org용)
+author = "Sokuri Korea Editorial Team"
+authorBio = "Sokuri Korea is an editorial team sharing practical, well-researched guides about Korean culture, food, travel, language, and daily life for international readers."
+authorURL = "/about/"
+authorAvatar = "https://img-korea.sk-sokuri.com/branding/author-avatar.webp"
+publisherName = "Sokuri Korea"
+publisherLogo = "https://img-korea.sk-sokuri.com/branding/logo.webp"
+
+# 콘텐츠 옵션
+showReadingTime = true
+showLastModified = true
+showTOC = true
+showShareButtons = true
+showRelatedPosts = true
+showAuthorBox = true
+
+# 공유 버튼
+shareTwitter = true
+shareFacebook = true
+sharePinterest = true
+shareLinkCopy = true
+
+# AI 작성 투명성
+aiAssisted = true
+aiNoticeText = "AI-assisted, human-reviewed"
+
 [[menus.main]]
 name = "Home"
 url = "/"
@@ -67,3 +99,21 @@ short = "Living"
   [caches.images]
     dir = ":cacheDir/images"
     maxAge = -1
+
+
+[related]
+threshold = 80
+includeNewer = true
+toLower = true
+
+[[related.indices]]
+name = "categories"
+weight = 100
+
+[[related.indices]]
+name = "tags"
+weight = 80
+
+[[related.indices]]
+name = "date"
+weight = 10

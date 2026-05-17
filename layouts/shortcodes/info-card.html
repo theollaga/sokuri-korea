@@ -1,0 +1,14 @@
+{{- /*
+  info-card — at-a-glance info box (e.g., hours, prices)
+  Usage:
+    {{< info-card title="Seoul Subway Quick Facts" >}}
+    - **Operating hours:** 5:30 AM – midnight
+    - **Base fare:** ₩1,400
+    - **Languages on signs:** Korean, English, Chinese, Japanese
+    {{< /info-card >}}
+*/ -}}
+{{- $title := .Get "title" | default "Quick Facts" -}}
+<aside class="info-card" aria-label="{{ $title }}">
+  <h3 class="info-card-title">{{ $title }}</h3>
+  <div class="info-card-body">{{ .Inner | $.Page.RenderString }}</div>
+</aside>

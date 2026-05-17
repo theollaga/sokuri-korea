@@ -1,0 +1,15 @@
+{{- /*
+  comparison — styled comparison table
+  Wraps a markdown table with a styled container.
+  Usage:
+    {{< comparison title="T-money vs Single Journey Ticket" >}}
+    | Feature | T-money | Single Ticket |
+    | ------- | ------- | ------------- |
+    | Cost    | Cheaper | Standard fare |
+    {{< /comparison >}}
+*/ -}}
+{{- $title := .Get "title" -}}
+<div class="comparison-block">
+  {{ with $title }}<h3 class="comparison-title">{{ . }}</h3>{{ end }}
+  <div class="comparison-table">{{ .Inner | $.Page.RenderString }}</div>
+</div>

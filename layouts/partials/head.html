@@ -8,3 +8,9 @@
   {{ $css = $css | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
 {{ end }}
+
+{{ $postCss := resources.Get "css/post.css" }}
+{{ if $postCss }}
+  {{ $postCss = $postCss | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $postCss.RelPermalink }}" integrity="{{ $postCss.Data.Integrity }}" crossorigin="anonymous">
+{{ end }}

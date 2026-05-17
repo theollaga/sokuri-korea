@@ -1,0 +1,16 @@
+{{- /*
+  qa — single Q&A pair inside {{< faq >}}
+  Usage:
+    {{< qa q="Question text" >}}
+    Answer in markdown.
+    {{< /qa >}}
+*/ -}}
+{{- $q := .Get "q" -}}
+{{- $aRendered := .Inner | $.Page.RenderString -}}
+{{- $aPlain := $aRendered | plainify | chomp -}}
+{{- /* Accumulate for FAQPage Schema */ -}}
+{{- $.Page.Scratch.Add "faqs" (slice (dict "q" $q "a" $aPlain)) -}}
+<details class="faq-item">
+  <summary class="faq-question">{{ $q }}</summary>
+  <div class="faq-answer">{{ $aRendered }}</div>
+</details>

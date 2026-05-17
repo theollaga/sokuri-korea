@@ -1,3 +1,8 @@
+{{- /* ============================================ */ -}}
+{{- /* SEO Partial — Sokuri Korea                    */ -}}
+{{- /* meta tags + Open Graph + Twitter + JSON-LD    */ -}}
+{{- /* ============================================ */ -}}
+
 {{- $siteTitle := .Site.Title -}}
 {{- $pageTitle := $siteTitle -}}
 {{- if not .IsHome -}}
@@ -7,25 +12,170 @@
 {{- end -}}
 
 {{- $description := .Description | default .Site.Params.description -}}
-{{- $description = $description | plainify | htmlEscape -}}
+{{- $description = $description | plainify -}}
+
+{{- /* Featured image — fallback to defaultOgImage */ -}}
+{{- $ogImage := .Site.Params.defaultOgImage -}}
+{{- with .Params.featured_image -}}
+  {{- $ogImage = . | absURL -}}
+{{- end -}}
+{{- $ogImageAlt := .Params.featured_image_alt | default .Title | default $siteTitle -}}
+
+{{- /* Keywords from tags + categories */ -}}
+{{- $keywords := slice -}}
+{{- with .Params.tags -}}{{ $keywords = $keywords | append . }}{{- end -}}
+{{- with .Params.categories -}}{{ $keywords = $keywords | append . }}{{- end -}}
 
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $description }}">
+{{ with $keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
 <link rel="canonical" href="{{ .Permalink }}">
 
+{{- /* Open Graph */ -}}
 <meta property="og:title" content="{{ $pageTitle }}">
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
-
-{{ with .Params.featured_image }}
-<meta property="og:image" content="{{ . | absURL }}">
+<meta property="og:locale" content="en_US">
+{{ with $ogImage }}
+<meta property="og:image" content="{{ . }}">
+<meta property="og:image:alt" content="{{ $ogImageAlt }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 {{ end }}
 
-<meta name="twitter:card" content="{{ if .Params.featured_image }}summary_large_image{{ else }}summary{{ end }}">
+{{- /* Article meta (for blog posts) */ -}}
+{{ if and .IsPage .Date }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ if .Lastmod }}<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+<meta property="article:author" content="{{ .Site.Params.author }}">
+{{ with .Params.categories }}{{ range . }}<meta property="article:section" content="{{ . }}">
+{{ end }}{{ end }}
+{{ with .Params.tags }}{{ range . }}<meta property="article:tag" content="{{ . }}">
+{{ end }}{{ end }}
+{{ end }}
+
+{{- /* Twitter Card */ -}}
+<meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
 <meta name="twitter:title" content="{{ $pageTitle }}">
 <meta name="twitter:description" content="{{ $description }}">
-{{ with .Params.featured_image }}
-<meta name="twitter:image" content="{{ . | absURL }}">
+{{ with .Site.Params.twitterHandle }}<meta name="twitter:site" content="{{ . }}">{{ end }}
+{{ with $ogImage }}<meta name="twitter:image" content="{{ . }}">
+<meta name="twitter:image:alt" content="{{ $ogImageAlt }}">{{ end }}
+
+{{- /* ============================================ */ -}}
+{{- /* JSON-LD Structured Data                       */ -}}
+{{- /* ============================================ */ -}}
+
+{{- /* Organization (always) */ -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ .Site.Params.publisherName }}",
+  "url": "{{ .Site.BaseURL }}",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ .Site.Params.publisherLogo }}"
+  },
+  "description": "{{ .Site.Params.description }}"
+}
+</script>
+
+{{- /* WebSite (homepage only) */ -}}
+{{ if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ .Site.Title }}",
+  "url": "{{ .Site.BaseURL }}",
+  "description": "{{ .Site.Params.description }}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.publisherName }}"
+  }
+}
+</script>
+{{ end }}
+
+{{- /* BlogPosting / Article (for posts) */ -}}
+{{ if and .IsPage (eq .Section "posts") }}
+{{- $authorFullURL := printf "%s%s" .Site.BaseURL (strings.TrimPrefix "/" .Site.Params.authorURL) -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
+  "headline": "{{ .Title }}",
+  "description": "{{ $description }}",
+  "image": "{{ $ogImage }}",
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ (.Lastmod | default .Date).Format "2006-01-02T15:04:05Z07:00" }}",
+  "author": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ $authorFullURL }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Params.publisherName }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.publisherLogo }}"
+    }
+  }
+  {{ with .Params.categories }},"articleSection": "{{ index . 0 }}"{{ end }}
+  {{ with .Params.tags }},"keywords": "{{ delimit . ", " }}"{{ end }}
+  {{ if .WordCount }},"wordCount": {{ .WordCount }}{{ end }}
+  ,"inLanguage": "en-US"
+}
+</script>
+{{ end }}
+
+{{- /* BreadcrumbList (posts and category term pages) */ -}}
+{{ if or (and .IsPage (eq .Section "posts")) (eq .Kind "term") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ .Site.BaseURL }}"
+    }
+    {{ if and .IsPage (eq .Section "posts") }}
+      {{ with .Params.categories }}
+        {{ $cat := index . 0 }}
+        {{ $catSlug := $cat | urlize }}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ $cat }}",
+          "item": "{{ $.Site.BaseURL }}categories/{{ $catSlug }}/"
+        }
+        ,{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ $.Title }}",
+          "item": "{{ $.Permalink }}"
+        }
+      {{ end }}
+    {{ else if eq .Kind "term" }}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ .Title }}",
+        "item": "{{ .Permalink }}"
+      }
+    {{ end }}
+  ]
+}
+</script>
 {{ end }}

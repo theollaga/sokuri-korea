@@ -1,0 +1,30 @@
+{{- /*
+  figure-credit — image with caption and photographer credit
+  Usage:
+    {{< figure-credit src="https://..." alt="..." caption="Optional caption."
+                      author="Photographer Name" source="Unsplash"
+                      author_url="https://..." >}}
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" -}}
+{{- $author := .Get "author" -}}
+{{- $source := .Get "source" -}}
+{{- $author_url := .Get "author_url" -}}
+{{- $width := .Get "width" | default "1200" -}}
+{{- $height := .Get "height" | default "800" -}}
+<figure class="post-figure">
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async" width="{{ $width }}" height="{{ $height }}" />
+  {{ if or $caption $author }}
+    <figcaption>
+      {{ with $caption }}<span class="figcaption-text">{{ . }}</span>{{ end }}
+      {{ with $author }}
+        <span class="figcaption-credit">
+          Photo by
+          {{ if $author_url }}<a href="{{ $author_url }}" rel="nofollow noopener" target="_blank">{{ . }}</a>{{ else }}{{ . }}{{ end }}
+          {{ with $source }} on {{ . }}{{ end }}
+        </span>
+      {{ end }}
+    </figcaption>
+  {{ end }}
+</figure>

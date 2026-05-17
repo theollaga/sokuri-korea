@@ -1,0 +1,21 @@
+{{- /*
+  callout — colored callout box
+  Usage:
+    {{< callout type="info" title="Pro Tip" >}}
+    Your message here.
+    {{< /callout >}}
+  Types: info (default), success, warning, danger, tip
+*/ -}}
+{{- $type := .Get "type" | default "info" -}}
+{{- $title := .Get "title" -}}
+{{- $icons := dict "info" "ⓘ" "success" "✓" "warning" "⚠" "danger" "✕" "tip" "💡" -}}
+{{- $icon := index $icons $type -}}
+<aside class="callout callout-{{ $type }}">
+  {{ with $title }}
+    <p class="callout-title">
+      <span class="callout-icon" aria-hidden="true">{{ $icon }}</span>
+      {{ . }}
+    </p>
+  {{ end }}
+  <div class="callout-body">{{ .Inner | $.Page.RenderString }}</div>
+</aside>

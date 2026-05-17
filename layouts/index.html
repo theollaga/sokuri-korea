@@ -1,77 +1,109 @@
 {{ define "main" }}
 <div class="site-container">
-<section class="hero">
-  {{ with .Params.featured_image }}
-    <img src="{{ absURL . }}" alt="{{ $.Site.Title }}" class="hero-image" loading="lazy" decoding="async" />
-  {{ end }}
-  <h1>{{ .Site.Title }}</h1>
-  <p>{{ .Site.Params.description }}</p>
-</section>
-<section class="featured">
-  <h2>Featured Guide</h2>
-  {{ $posts := where .Site.RegularPages "Section" "posts" }}
-  {{ $first_post := index $posts 0 }}
-  {{ with $first_post.Params.featured_image }}
-    <img src="{{ absURL . }}" alt="{{ $first_post.Title }}" class="featured-image" loading="lazy" decoding="async" />
-  {{ end }}
-  <div class="grid">
-    {{ $posts := where .Site.RegularPages "Section" "posts" }}
-    {{ $first := $posts | first 1 }}
-    {{ range $first }}
-      <article class="card">
-        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-        <p>{{ .Description }}</p>
-      </article>
+
+  {{- /* ============================== */ -}}
+  {{- /* HERO                            */ -}}
+  {{- /* ============================== */ -}}
+  <section class="hero">
+    {{ with .Params.featured_image }}
+      <img src="{{ absURL . }}" alt="{{ $.Params.featured_image_alt | default $.Site.Title }}" class="hero-image" loading="lazy" decoding="async" />
     {{ end }}
-  </div>
-</section>
-<section class="explore">
-  <h2>Explore by Category</h2>
-  <div class="grid">
-{{ $categories := .Site.Taxonomies.categories }}
-    {{ range $name, $category := $categories }}
-      {{ if gt ($category.Count) 0 }}
-        {{ $catURL := printf "/categories/%s/" ($name | urlize) | relURL }}
+    <h1>{{ .Site.Title }}</h1>
+    <p>{{ .Site.Params.description }}</p>
+  </section>
+
+  {{- /* ============================== */ -}}
+  {{- /* FEATURED GUIDE (latest post)    */ -}}
+  {{- /* ============================== */ -}}
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ if $posts }}
+    {{ $featured := index $posts 0 }}
+    <section class="featured">
+      <h2>Featured Guide</h2>
+      <article class="featured-card">
+        {{ with $featured.Params.featured_image }}
+          <a href="{{ $featured.RelPermalink }}">
+            <img src="{{ absURL . }}" alt="{{ $featured.Title }}" class="featured-image" loading="lazy" decoding="async" />
+          </a>
+        {{ end }}
+        <div class="featured-body">
+          <h3><a href="{{ $featured.RelPermalink }}">{{ $featured.Title }}</a></h3>
+          {{ with $featured.Description }}<p>{{ . }}</p>{{ end }}
+          <a href="{{ $featured.RelPermalink }}" class="featured-cta">Read the guide →</a>
+        </div>
+      </article>
+    </section>
+  {{ end }}
+
+  {{- /* ============================== */ -}}
+  {{- /* EXPLORE BY CATEGORY (6 cards)   */ -}}
+  {{- /* ============================== */ -}}
+  <section class="explore">
+    <h2>Explore by Category</h2>
+    <div class="grid category-grid">
+      {{- $categoryDefs := slice
+        (dict "slug" "food" "name" "Food & Drink" "desc" "Korean cuisine, dining etiquette, street food, cafés, and drinking culture.")
+        (dict "slug" "travel" "name" "Travel" "desc" "Destinations, transportation, itineraries, and practical travel tips for visitors.")
+        (dict "slug" "culture" "name" "Culture & Lifestyle" "desc" "Traditions, holidays, daily life, etiquette, and modern lifestyle explained for foreigners.")
+        (dict "slug" "language" "name" "Language" "desc" "Korean phrases, hangul basics, pronunciation, and everyday vocabulary for learners.")
+        (dict "slug" "entertainment" "name" "K-Entertainment" "desc" "K-pop, K-dramas, films, concerts, fan culture, and entertainment industry insights.")
+        (dict "slug" "living" "name" "Living in Korea" "desc" "Visa, housing, healthcare, banking, work, and daily living tips for expats and long-term visitors.")
+      -}}
+      {{ range $categoryDefs }}
+        {{ $slug := .slug }}
+        {{ $name := .name }}
+        {{ $desc := .desc }}
+        {{ $taxonomy := index $.Site.Taxonomies.categories $name }}
+        {{ $count := 0 }}
+        {{ if $taxonomy }}{{ $count = $taxonomy.Count }}{{ end }}
+        {{ $catURL := printf "/categories/%s/" $slug }}
+        {{ $catImage := printf "https://img-korea.sk-sokuri.com/categories/%s/%s-category.webp" $slug $slug }}
         <a href="{{ $catURL }}" class="category-card">
-          {{ $catImage := "" }}
-          {{ $lowerName := lower $name }}
-          {{ if in (slice "culture" "food" "language" "travel" "entertainment" "living") $lowerName }}
-            {{ $catImage = printf "https://img-korea.sk-sokuri.com/categories/%s/%s-category.webp" ($lowerName | urlize) ($lowerName | urlize) }}
-          {{ end }}
-          {{ if $catImage }}
-                      <img src="{{ $catImage }}" alt="{{ $name }} category" class="category-image" loading="lazy" decoding="async" />
-          {{ end }}
-          <h3>{{ $name | title }}</h3>
-          <p>{{ $category.Count }} article{{ if gt ($category.Count) 1 }}s{{ end }}</p>
+          <img src="{{ $catImage }}" alt="{{ $name }} category" class="category-image" loading="lazy" decoding="async" />
+          <div class="category-body">
+            <h3>{{ $name }}</h3>
+            <p class="category-desc">{{ $desc }}</p>
+            <p class="category-count">
+              {{ if eq $count 0 }}Coming soon{{ else }}{{ $count }} article{{ if gt $count 1 }}s{{ end }}{{ end }}
+            </p>
+          </div>
         </a>
       {{ end }}
-    {{ end }}
-  </div>
-</section>
-<section class="latest">
-  <h2>Latest Articles</h2>
-  <ul class="post-list">
-    {{ $posts := where .Site.RegularPages "Section" "posts" }}
-    {{ $first := $posts | first 5 }}
-    {{ range $first }}
-      <li>
-        {{ if .Params.featured_image }}
-          <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" class="post-thumb" loading="lazy" decoding="async" />
+    </div>
+  </section>
+
+  {{- /* ============================== */ -}}
+  {{- /* LATEST ARTICLES                 */ -}}
+  {{- /* ============================== */ -}}
+  {{ if $posts }}
+    <section class="latest">
+      <h2>Latest Articles</h2>
+      <ul class="post-list">
+        {{ range $posts | first 5 }}
+          <li>
+            {{ if .Params.featured_image }}
+              <img src="{{ absURL .Params.featured_image }}" alt="{{ .Title }}" class="post-thumb" loading="lazy" decoding="async" />
+            {{ end }}
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+          </li>
         {{ end }}
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        <time datetime="{{ .Date }}">{{ .Date.Format "Jan 2, 2006" }}</time>
-      </li>
-    {{ end }}
-  </ul>
-</section>
-<section class="why">
-  <h2>Why Learn About Korea?</h2>
-  <ul>
-    <li>Rich cultural heritage spanning thousands of years</li>
-    <li>Dynamic blend of tradition and modernity</li>
-    <li>Unique cuisine, language, and customs</li>
-    <li>Influential in technology, entertainment, and design</li>
-  </ul>
-</section>
+      </ul>
+    </section>
+  {{ end }}
+
+  {{- /* ============================== */ -}}
+  {{- /* WHY LEARN ABOUT KOREA           */ -}}
+  {{- /* ============================== */ -}}
+  <section class="why">
+    <h2>Why Learn About Korea?</h2>
+    <ul>
+      <li>Rich cultural heritage spanning thousands of years</li>
+      <li>Dynamic blend of tradition and modernity</li>
+      <li>Unique cuisine, language, and customs worth experiencing</li>
+      <li>Global influence in technology, entertainment, and design</li>
+    </ul>
+  </section>
+
 </div>
 {{ end }}

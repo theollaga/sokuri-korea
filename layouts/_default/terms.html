@@ -12,16 +12,16 @@
       <li>
         {{ $termName := .Name }}
         {{ $termSlug := $termName | urlize }}
-        {{ $supportedCategories := slice "culture" "food" "language" "travel" "transportation" "modern-korea" }}
+        {{ $supportedCategories := slice "culture" "food" "language" "travel" "entertainment" "living" }}
         {{ if in $supportedCategories $termSlug }}
-          {{ $imageURL := printf "https://img-korea.sk-sokuri.com/categories/%s-category.webp" $termSlug }}
-          <img src="{{ $imageURL }}" 
-               alt="{{ $termName }} category" 
-               class="category-image" 
-               loading="lazy" 
+          {{ $imageURL := printf "https://img-korea.sk-sokuri.com/categories/%s/%s-category.webp" $termSlug $termSlug }}
+          <img src="{{ $imageURL }}"
+               alt="{{ $termName }} category"
+               class="category-image"
+               loading="lazy"
                decoding="async" />
         {{ end }}
-        <a href="{{ .Page.Permalink }}">{{ $termName }} ({{ .Count }})</a>
+        <a href="{{ .Page.Permalink }}">{{ $termName | title }} ({{ .Count }})</a>
       </li>
     {{ end }}
   </ul>

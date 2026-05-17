@@ -1,0 +1,41 @@
+{{- /*
+  faq — frequently asked questions with FAQPage Schema
+  Usage:
+    {{< faq >}}
+      {{< qa q="Is the subway open all night?" >}}
+      No, Seoul Subway runs from about 5:30 AM to midnight.
+      {{< /qa >}}
+      {{< qa q="How do I pay?" >}}
+      Use a T-money card or contactless credit card.
+      {{< /qa >}}
+    {{< /faq >}}
+*/ -}}
+<section class="faq-block" aria-label="Frequently asked questions">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <div class="faq-list">
+    {{ .Inner | $.Page.RenderString }}
+  </div>
+</section>
+
+{{- /* Collect Q&A pairs from inner shortcodes via page scratch */ -}}
+{{- $faqs := $.Page.Scratch.Get "faqs" -}}
+{{ if $faqs }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $i, $f := $faqs }}{{ if $i }},{{ end }}
+    {
+      "@type": "Question",
+      "name": "{{ $f.q }}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ $f.a }}"
+      }
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}

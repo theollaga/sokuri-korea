@@ -1,0 +1,14 @@
+{{- /*
+  pro-tip — emphasized tip (shorthand for callout type="tip")
+  Usage:
+    {{< pro-tip >}}
+    Get a T-money card at any convenience store for the cheapest fares.
+    {{< /pro-tip >}}
+*/ -}}
+<aside class="callout callout-tip pro-tip">
+  <p class="callout-title">
+    <span class="callout-icon" aria-hidden="true">💡</span>
+    Pro Tip
+  </p>
+  <div class="callout-body">{{ .Inner | $.Page.RenderString }}</div>
+</aside>

@@ -19,3 +19,5 @@ node_modules/
 hugo_bin
 hugo_*.tar.gz
 *.deb
+*.bak
+*.code-workspace
