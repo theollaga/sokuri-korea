@@ -1,19 +1,18 @@
 {{- /*
-  steps — numbered step list with optional HowTo Schema
+  steps — numbered step block (visual only, no schema).
   Usage:
-    {{< steps title="How to ride the Seoul subway" >}}
-      {{< step title="Buy a T-money card" >}}
-      You can buy one at any convenience store.
-      {{< /step >}}
-      {{< step title="Tap in" >}}
-      Tap your card on the reader at the gate.
-      {{< /step >}}
+    {{< steps title="How to use the subway" >}}
+    ### Step 1: Buy a card
+    Walk into any convenience store...
+
+    ### Step 2: Tap in
+    Hold the card flat over the reader...
     {{< /steps >}}
 */ -}}
 {{- $title := .Get "title" | default "Steps" -}}
 <section class="steps-block" aria-label="{{ $title }}">
   <h2 class="steps-title">{{ $title }}</h2>
-  <ol class="steps-list">
+  <div class="steps-list">
     {{ .Inner | $.Page.RenderString }}
-  </ol>
+  </div>
 </section>

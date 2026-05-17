@@ -816,3 +816,41 @@
   .step-item::before { left: 0.75rem; width: 1.75rem; height: 1.75rem; font-size: 0.85rem; }
   .author-box { flex-direction: column; align-items: center; text-align: center; }
 }
+
+/* === Steps Block — auto-numbered === */
+.steps-block {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-left: 4px solid #2563eb;
+  border-radius: 0.5rem;
+  counter-reset: step-counter;
+}
+.steps-block > .steps-title {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #1e40af;
+}
+.steps-block h3 {
+  counter-increment: step-counter;
+  position: relative;
+  padding-left: 2.8rem;
+  margin-top: 1.5rem;
+  font-size: 1.15rem;
+}
+.steps-block h3::before {
+  content: counter(step-counter);
+  position: absolute;
+  left: 0;
+  top: -0.1rem;
+  width: 2rem;
+  height: 2rem;
+  background: #2563eb;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
